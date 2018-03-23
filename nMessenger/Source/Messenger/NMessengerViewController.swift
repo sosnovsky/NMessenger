@@ -211,6 +211,11 @@ open class NMessengerViewController: UIViewController, UITextViewDelegate, NMess
                     self.inputBarBottomSpacing.constant = 0
                     self.inputBarBottomSpacing.constant -= endFrame?.size.height ?? 0.0
                 }
+              
+                if let tabBarController = self.tabBarController {
+                  self.inputBarBottomSpacing.constant = inputBarBottomSpacing.constant + tabBarController.tabBar.frame.size.height
+                }
+              
                 self.isKeyboardIsShown = true
             }
             
