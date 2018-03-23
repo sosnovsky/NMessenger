@@ -118,7 +118,7 @@ open class MessageGroup: GeneralMessengerCell {
     override open func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         var tableWidth:CGFloat = 0
         
-        let justifyLocation = isIncomingMessage ? ASStackLayoutJustifyContent.start : ASStackLayoutJustifyContent.end
+        let justifyLocation = ASStackLayoutJustifyContent.center  //isIncomingMessage ? ASStackLayoutJustifyContent.start : ASStackLayoutJustifyContent.end
         
         //make a space for the avatar if needed
         if let avatarNode = self.avatarNode {
@@ -162,12 +162,12 @@ open class MessageGroup: GeneralMessengerCell {
             
             //layout horizontal stack
             let cellOrientation = self.isIncomingMessage ? [ins, retLayout] : [retLayout, ins]
-            stackLayout = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: justifyLocation, alignItems: .end, children: cellOrientation)
+            stackLayout = ASStackLayoutSpec(direction: .horizontal, spacing: 0, justifyContent: justifyLocation, alignItems: .center, children: cellOrientation)
             retLayout = stackLayout!
         }
         
-        let cellOrientation = self.isIncomingMessage ? [spacer, retLayout] : [retLayout, spacer]
-        stackLayout = ASStackLayoutSpec(direction: .horizontal, spacing: self.messageOffset, justifyContent: justifyLocation, alignItems: .end, children: cellOrientation)
+        let cellOrientation = [retLayout] //self.isIncomingMessage ? [spacer, retLayout] : [retLayout, spacer]
+        stackLayout = ASStackLayoutSpec(direction: .horizontal, spacing: self.messageOffset, justifyContent: justifyLocation, alignItems: .center, children: cellOrientation)
         insetLayout = ASInsetLayoutSpec(insets: self.cellPadding, child: stackLayout!)
         
         return insetLayout!
